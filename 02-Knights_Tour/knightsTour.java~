@@ -1,0 +1,48 @@
+public class knightsTour{
+    private char[][] board;
+    private int maxX;
+    private int maxY;
+
+    private char space = '#';
+    private char knight = 'N';
+    private String divider = "";
+
+    public knightsTour(){
+	knightsTour(5,5)
+    }
+
+    public knightsTour(int x,int y){
+	maxX=x;
+	maxY=y;
+	for (int x=0;x<maxX;x++){
+	    for (int y =0;y<maxY;y++){
+		board[x][y] = space;
+	    }
+	    divider+="--";
+	}
+    }
+
+    public String toString(){
+	string s = "";
+	for (int x=0;x<maxX;x++){
+	    s=divider+s;
+	    for (int y =0;y<maxY;y++){ 
+		s+="| "+board[x][y]+" |";
+	    }
+	    s+="\n";
+	}
+	s+=divider;
+	return s;
+    }
+
+    public void delay(int n){
+	try {
+	    Thread.sleep(n);
+	} catch (Exception e) {}
+    }
+
+    public static void main(String[] args) {
+	knightTour t = new knightTour();
+	system.out.println(t);
+    }
+}
