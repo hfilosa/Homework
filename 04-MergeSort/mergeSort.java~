@@ -1,0 +1,5 @@
+import java.util.Arraylists;
+
+public class mergeSort{
+
+    public ArrayList<Integer> merge(ArrayList<Integer> A, ArrayList<Integer> B){
