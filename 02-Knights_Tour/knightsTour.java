@@ -76,7 +76,8 @@ public class knightsTour{
 	if (!board[x][y].equals("#")){
 	    return;
 	}
-	//	System.out.println(this);
+	System.out.println(this);
+	delay(1);
 	board[x][y]=Integer.toString(move);
 	move+=1;
 	solve(x+2,y+1);

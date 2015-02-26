@@ -16,4 +16,17 @@ public class mergeSort{
 	}
 	return ans;
     }
+
+    public static void main(String[] args){
+	mergeSort t = new mergeSort();
+	ArrayList<Integer> a = new ArrayList<Integer>();
+	ArrayList<Integer> b = new ArrayList<Integer>();
+	for (int i=0;i<11;i+=2){
+	    a.add(i);
+	}
+	for (int i=1;i<12;i+=2){
+	    b.add(i);
+	} 
+	System.out.println(t.merge(a,b));
+    }
 }
