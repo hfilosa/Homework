@@ -1,34 +1,28 @@
 public class selection{
-    /*returns an integer array with the value at si(startIndex) placed in its proper 
-      location relative to ei(endIndex). For example, calling pivot (l,0,l.length) will return 
-      an array with the value at l[0] in its proper position if the entire list were sorted.
-    */
-
-    public int[] pivot(int[] l, int si, int ei){
-	int[] d = new int[l.length];
-	for (int i=0;i<l.length;i++){
-	    d[i]=l[i];
+ 
+    public int select(int[] A, int k, int low, int high){
+	int pivot = l[k];
+	int pivotIndex=k;
+	l[k]=l[high];
+	l[high]=k;
+	while (high<low){
+	if (si==ei){
+	    pivotIndex=si;
+	    System.out.println("!");
+	    break;
 	}
-	int pivot = l[si];
-	for (int i=0;i<l.length+1;i++){
-	    if (si==ei){
-		d[si]=pivot;
-		System.out.println("!");
-		break;
-	    }
-	    if (l[i]<pivot){
-		d[si]=l[i];
-		System.out.println("si: "+si);
-		si++;
-	    }
-	    if (l[i]>pivot){
-		d[ei]=l[i];
-		System.out.println("ei: "+ei);
-		ei++;
-	    }
+	if (l[i]<pivot){
+	    d[si]=l[i];
+	    System.out.println("si: "+si);
+	    si++;
 	}
-	return d;
+	if (l[i]>pivot){
+	    d[ei]=l[i];
+	    System.out.println("ei: "+ei);
+	    ei++;
+	}
     }
+
 
     public String print(int[] s){
 	String ans = "";
