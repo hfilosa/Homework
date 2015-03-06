@@ -82,13 +82,15 @@ public class mergeSort{
 	    length2-=1;
 	    }
 	if (args[0].equals("0")){
-	    System.out.println("Starting my sort method. Length= "+x);
+	    System.out.print("Starting my sort method. Length= ");
+	    System.out.printf("%,d",x);
 	    a = t.mergeSort(a);
 	    System.out.println("Done");
 
 	}
 	if (args[0].equals("1")){
-	    System.out.println("Starting Java Sort. Length= "+x);
+	    System.out.print("Starting Java Sort. Length=");
+	    System.out.printf("%,d",x);
 	    Collections.sort(b);
 	    System.out.println("Done");
 	}
