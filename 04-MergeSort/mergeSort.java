@@ -65,14 +65,32 @@ public class mergeSort{
     public static void main(String[] args){
 	mergeSort t = new mergeSort();
 	Random rand = new Random();
-	int length = 100;
+	int length = 10000000;
+	if (args.length>1){
+	    length = Integer.parseInt(args[1]);
+	}
+	int x = length;
+	int length2 = length;
 	int[] a = new int[length];
 	while (length>0){
 	    a[length-1]=rand.nextInt(100);
 	    length-=1;
+	    }
+	ArrayList<Integer> b = new ArrayList<Integer>();
+	while (length2>0){
+	    b.add(rand.nextInt(100));
+	    length2-=1;
+	    }
+	if (args[0].equals("0")){
+	    System.out.println("Starting my sort method. Length= "+x);
+	    a = t.mergeSort(a);
+	    System.out.println("Done");
+
 	}
-	System.out.println(t.print(a));
-	a = t.mergeSort(a);
-	System.out.println(t.print(a));
+	if (args[0].equals("1")){
+	    System.out.println("Starting Java Sort. Length= "+x);
+	    Collections.sort(b);
+	    System.out.println("Done");
+	}
     }
 }
