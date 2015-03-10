@@ -1,0 +1,60 @@
+public class {
+ 
+    public int select(int[] A, int k, int low, int high){
+	int pivot = A[k];
+	int pivotIndex;
+	int high2 = high;
+	A[k]=A[high];
+	A[high]=pivot;
+	high-=1;
+	while (high>low){
+	    if (A[low]<pivot){
+		low+=1;
+	    }
+	    else if (A[low]>pivot){
+		int temp = A[high];
+		A[high]=A[low];
+		A[low]=temp;
+		high-=1;
+	    }
+	}
+	if (pivot>A[low]){
+	    pivotIndex=low+1;
+	}
+	else {pivotIndex=low;}
+	int i=high2;
+	while (i>pivotIndex){
+	    A[i]=A[i-1];
+	    i--;
+	}
+	A[pivotIndex]=pivot;
+	if (pivotIndex>k){
+	    return select(A,k,0,pivotIndex);
+	}
+	else if (pivotIndex<k){
+	    return select(A,k,pivotIndex+1,A.length-1);
+	}
+	else if (pivotIndex==k){
+	    return A[k];
+	}
+	return -1;
+    }
+
+
+    public String print(int[] s){
+	String ans = "";
+	for (int i=0;i<s.length;i++){
+	    ans+=s[i]+" ";
+	}
+	return ans;
+    }
+
+    public static void main(String Args[]){
+	selection s = new selection();
+	int[] t = {3,8,2,7,5,12,1};
+	System.out.println(s.print(t));
+
+    }
+}
+
+
