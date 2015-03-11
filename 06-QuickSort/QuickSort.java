@@ -66,33 +66,15 @@ public class QuickSort{
 	return select(A,k,0,A.length-1);
     }
 
-    public void Qsort(int low,int high){
-	int pivot = select(A,(low+high)/2,low,high);
-	int i=low;
-	int j=high;
-	while (i<=j){
-	    while (A[i]<pivot){
-		i++;
-	    }
-	    while (A[j]<pivot){
-		j--;
-	    }
-	    if (i<=j){
-	        int tmp=A[i];
-		A[i]=A[j];
-		A[j]=tmp;
-		i++;
-		j--;
-	    }
-	}
-	if (low < j)
-	    Qsort(low, j);
-	if (i < high)
-	    Qsort(i, high);
+    public void Qsort(int[] A,int low,int high){
+	if (low>=high) return;
+	int pivotIndex=partition(A,low,high);
+	Qsort(A,low,pivotIndex-1);
+	Qsort(A,pivotIndex+1,high);
     }
 
     public void Qsort(){
-	Qsort(0,A.length-1);
+	Qsort(A,0,A.length-1);
     }
     public String print(){
 	String ans = "";
