@@ -19,11 +19,16 @@ public class Driver{
 		    System.out.println(l+"\n");
 		    l.add(10,"c");
 		    System.out.println("'c' inserted as ninth link");
-		    System.out.println("Method will not go past the end of the links");
-		    System.out.println(l.getNode(9));
-		    System.out.println(l.getNode(9).getNext());
-		    System.out.println(l);
-
+		    System.out.println(l+"\n");
+		    l.remove(0);
+		    System.out.println("Zeroth link removed");
+		    System.out.println(l+"\n");
+		    l.remove(5);
+		    System.out.println("Fifth link removed");
+		    System.out.println(l+"\n");
+		    l.remove(10);
+		    System.out.println("Tenth link removed");
+		    System.out.println(l+"\n");
 
 		}
 }

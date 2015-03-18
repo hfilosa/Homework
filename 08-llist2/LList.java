@@ -22,8 +22,7 @@ public class LList{
 
    //Traces links until i is equal to nth item needed and returns that node.
     public Node getNode(int n){
-	if (n==0) return l.getNext();
-	if (n>len) return null;
+	if (n>len-1) return null;
         int i=0;
 	for (Node tmp=l.getNext();tmp!=null;tmp=tmp.getNext()){
 	    if (i==n){
@@ -36,22 +35,24 @@ public class LList{
   
     //Returns data at node found with findNode.
     public String get(int n){
-	if (getNode(n)!=null){
-	    return getNode(n).getData();
-	}
-	else return "Passed end of links";
+	if (n>len-1) return "Passed end of links";
+	return getNode(n).getData();
     }
 
     public void add(int n, String s){
 	if (n>len) return;
 	Node newNode = new Node(s);
-	newNode.setNext(getNode(n));
-	getNode(n-1).setNext(newNode);
+	if (n<len) newNode.setNext(getNode(n));
+	if (n>0) getNode(n-1).setNext(newNode);
+	else l.setNext(newNode);
 	len+=1;	
     }
 
     public void remove(int n){
-        getNode(n-1).setNext(getNode(n+1));
+	if (n>len) return;
+	if (n==0) l.setNext(getNode(1));
+        else getNode(n-1).setNext(getNode(n+1));
+	len-=1;
     }
 
 }
