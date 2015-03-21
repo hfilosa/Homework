@@ -24,9 +24,13 @@ public class Driver{
 	while (i.hasNext())
 	    System.out.println(i.next());
 				
-        LLit<Integer> i2 = LLit(l2);
-	i2.remove();
-	while (i2.hasNext())
-	    System.out.println(i2.next());
+        Iterator<Integer> i2 = l2.iterator();
+	int num;
+	while (i2.hasNext()){
+	    num=i2.next();
+	    if ((num/2)==0){i2.remove();}
+	    else {System.out.println(num);}
+	}
+	System.out.println(l2);
     }
 }
