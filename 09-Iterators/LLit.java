@@ -25,5 +25,6 @@ public class LLit<E> implements Iterator<E>{
     public void remove(){
 	c.setNext(a);
 	b = a;
+	a=a.getNext();
     }
 }

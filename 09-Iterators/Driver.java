@@ -20,17 +20,20 @@ public class Driver{
 
 	System.out.println(l2);
 
-	Iterator<String> i = l.iterator();
-	while (i.hasNext())
-	    System.out.println(i.next());
-				
+	Iterator<String> i = l.iterator();	        
         Iterator<Integer> i2 = l2.iterator();
-	int num;
-	while (i2.hasNext()){
-	    num=i2.next();
-	    if ((num/2)==0){i2.remove();}
-	    else {System.out.println(num);}
-	}
+
+	System.out.println(i.next());
+	System.out.println(i2.next());
+	
+	//i.remove();
+	i2.remove();
+
+	System.out.println(i.next());
+	System.out.println(i2.next());
+
+	System.out.println(l);
 	System.out.println(l2);
+        
     }
 }
