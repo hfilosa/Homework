@@ -76,7 +76,7 @@ public class Maze
 	    System.out.println(frontier);
 	    board[x2][y2]=visited;
 	    frontier.dequeue();
-	    delay(5000);
+	    delay(500);
 	    System.out.println(this);
 	}
     }

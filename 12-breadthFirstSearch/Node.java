@@ -7,7 +7,7 @@ public class Node{
     }
     public Node(int xtmp, int ytmp){
 	x = xtmp;
-	ytmp = y;
+	y = ytmp;
 	next = null;
     }
     public void setX(int xtmp){
