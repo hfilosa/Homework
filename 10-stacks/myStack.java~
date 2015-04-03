@@ -1,0 +1,28 @@
+public class myStack<E>{
+    Node<E> first;
+
+    public myStack(E data){
+	Node<E> tmp = new Node<E>(data);
+	first = tmp;
+    }
+   
+    public void push(E data){
+ 	Node<E> tmp = new Node<E>(data);
+	tmp.setNext(first);
+	first=tmp;
+    }
+
+    public E pop(){
+        E ans = first.getData();
+	first = first.getNext();
+	return ans;
+    }
+
+    public boolean empty(){
+	return first==null;
+    }
+
+    public E top() {
+        return first.getData();
+    }
+}
