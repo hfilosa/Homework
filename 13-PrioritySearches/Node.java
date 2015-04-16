@@ -1,11 +1,15 @@
 public class Node {
-    private int x,y,priority;
+    //the node with the lowest priority is placed at the front of the queue
+    //priority is based off the number of steps away from the exit plus the stimated distance to the exit
+    //cost is the number of steps away from the start of the maze this node is
+    private int x,y,priority,cost;
     private Node prev;
 		
-    public Node(int x, int y, int priority){
+    public Node(int x, int y, int priority, int cost){
 	this.x = x;
 	this.y = y;
 	this.priority = priority;
+	this.cost = cost;
     }
 
     public Node getPrev() {
@@ -25,7 +29,11 @@ public class Node {
     }
 
     public int getPriority(){
-	return priority;
+	return priority+cost;
+    }
+
+    public int getCost(){
+	return cost;
     }
 		
 }

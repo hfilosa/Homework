@@ -17,7 +17,7 @@ public class Maze
 
     private Frontier f;
 		
-    public void delay(int n){
+    public static void delay(int n){
 	try {
 	    Thread.sleep(n);
 	} catch (Exception e) {}
@@ -72,24 +72,24 @@ public class Maze
     /*
       Only adds if the tx,ty spot is available path or exit
     */
-    public void addToFront(int tx,int ty, Node current){
+    public void addToFront(int tx,int ty, Node current, int cost){
 	Node tmp = null;
 	if (board[tx][ty]=='#' || board[tx][ty]=='$'){
-	    tmp = new Node(tx,ty,euclideanDistance(tx,ty));
+	    tmp = new Node(tx,ty,manhattanDistance(tx,ty),cost);
 	    tmp.setPrev(current);
 	    f.add(tmp);
 	}
 						
     }
 
-    public int euclideanDistance(int x, int y){
-	return (int) Math.sqrt((x-exitX)^2 + (y-exitY)^2);
+    public int manhattanDistance(int x, int y){
+	return Math.abs(x-exitX) + Math.abs(y-exitY);
     }
 
-    //Best Fisrt Search. Finds shortest path to exit.
+    //Best Fisrt Search. Does not take into account travel cost
     public void bfs(int x, int y){
 	f = new Frontier();
-	f.add(new Node(x,y,euclideanDistance(x,y)));
+	f.add(new Node(x,y,manhattanDistance(x,y),0));
 	int tx=0,ty=0;
 	Node current = null;
 	while (!f.isEmpty()){
@@ -102,10 +102,10 @@ public class Maze
 						
 	    board[cx][cy]='z';
 		
-	    addToFront(cx+1,cy,current);
-	    addToFront(cx-1,cy,current);
-	    addToFront(cx,cy+1,current);
-	    addToFront(cx,cy-1,current);
+	    addToFront(cx+1,cy,current,0);
+	    addToFront(cx-1,cy,current,0);
+	    addToFront(cx,cy+1,current,0);
+	    addToFront(cx,cy-1,current,0);
 
 	    delay(100);
 	    System.out.println(this);
@@ -118,13 +118,54 @@ public class Maze
 	    System.out.println(this);
 	}
     }
+ 
+    public void AStar(int x, int y){
+	f = new Frontier();
+	f.add(new Node(x,y,manhattanDistance(x,y),0));
+	int tx=0,ty=0;
+	Node current = null;
+	while (!f.isEmpty()){
+	    current = f.remove();
+	    int cx = current.getX();
+	    int cy = current.getY();
+	    int cost = current.getCost();
+
+	    if (board[cx][cy]=='$')
+		break;
+						
+	    board[cx][cy]='z';
+		
+	    addToFront(cx+1,cy,current,cost+1);
+	    addToFront(cx-1,cy,current,cost+1);
+	    addToFront(cx,cy+1,current,cost+1);
+	    addToFront(cx,cy-1,current,cost+1);
+
+	    delay(100);
+	    System.out.println(this);
+	}
+
+	    // path recovery
+	for (Node p = current.getPrev(); p != null ; p = p.getPrev()){
+	    board[p.getX()][p.getY()] = 'P';
+	    delay(100);
+	    System.out.println(this);
+	}
+    }
+
 		
     public static void main(String[] args){
 	Maze m = new Maze();
 	System.out.println(m);
+	System.out.println("Begining Best First Search");
+	delay(1000);
 	m.bfs(1,1);
 	System.out.println(m);
-		
+	Maze n = new Maze();
+	System.out.println(n);
+	System.out.println("Begining A* Search");
+	delay(1000);
+	n.AStar(1,1);
+	System.out.println(n);
     }
 }
 
