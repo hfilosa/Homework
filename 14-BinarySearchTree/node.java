@@ -1,4 +1,4 @@
-public class node<E>{
+public class node<E extends Comparable<E>>{
     private E data;
     private node<E> right,left;
 
@@ -18,17 +18,20 @@ public class node<E>{
     public E getData(){
 	return data;
     }
-    public void setLeft(Node<E> n){
+    public void setLeft(node<E> n){
 	left = n;
     }
-    public void setRight(Node<E> n){
+    public void setRight(node<E> n){
 	right = n;
     }
-    public Node<E> getLeft(){
+    public node<E> getLeft(){
 	return left;
     }
-    public Node<E> getRight(){
+    public node<E> getRight(){
 	return right;
+    }
+    public int compareTo(node<E> other){
+	return data.compareTo(other.getData());
     }
     public String toString(){
 	return ""+data;

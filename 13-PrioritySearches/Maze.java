@@ -30,7 +30,7 @@ public class Maze
 				
 	try {
 						
-	    Scanner sc = new Scanner(new File("maze.dat"));
+	    Scanner sc = new Scanner(new File("maze2.dat"));
 	    int j=0;
 	    while (sc.hasNext())
 		{
@@ -140,14 +140,14 @@ public class Maze
 	    addToFront(cx,cy+1,current,cost+1);
 	    addToFront(cx,cy-1,current,cost+1);
 
-	    delay(100);
+	    delay(70);
 	    System.out.println(this);
 	}
 
 	    // path recovery
 	for (Node p = current.getPrev(); p != null ; p = p.getPrev()){
 	    board[p.getX()][p.getY()] = 'P';
-	    delay(100);
+	    delay(80);
 	    System.out.println(this);
 	}
     }
