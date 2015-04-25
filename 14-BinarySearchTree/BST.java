@@ -1,3 +1,5 @@
+import java.util.*;
+
 //Binary search tree
 public class BST<E extends Comparable<E>>{
     private node<E> root;
@@ -83,12 +85,66 @@ public class BST<E extends Comparable<E>>{
 	if (c>0) parent.setRight(leaf);
 	else if (c<0) parent.setLeft(leaf);
     }
-    
+    //returns depth of tree where 0 is a tree with only a root, 1 is a tree with one branch, etc.
+    public int rDepth(node<E> T){ 
+	if (T.getLeft()==null && T.getRight()==null) return 0;
+	if (T.getLeft()!=null) return 1+rDepth(T.getLeft());
+	if (T.getRight()!=null) return 1+rDepth(T.getRight());
+	return 0;
+    }
+
+    //wrapper for recursive depth finder
+    public int depth(){
+	return rDepth(root);
+    }
+
+    public String print(){
+	String ans="";
+	LinkedList<node<E>> queue = new LinkedList<node<E>>();
+	queue.add(root);
+	int depth = depth();
+	int n=0;
+	String spaces="";
+	int temp;
+	node<E> test;
+	while (n<depth+1){
+	    spaces="";
+	    temp=queue.size();
+	    for (int i=0;i<temp;i++){	
+		if (queue.get(i).getRight()==null) queue.add(new node<E>(null));
+		else queue.add(queue.get(i).getRight());
+		if (queue.get(i).getLeft()==null) queue.add(new node<E>(null));
+		else queue.add(queue.get(i).getLeft());
+	    }
+	    for (int c=depth-n;c>0;c--){
+		spaces+=" ";
+	    }
+	    ans+=spaces;
+	    for (int c=(int)Math.pow(2,n);c>0;c--){
+		test = queue.pop();
+		if (test.getData()==null) ans+="  ";
+        	else ans+=test.getData()+" ";
+	    }
+	    ans+="\n";
+	    n++;
+	}
+	return ans;
+    }
+
+
      public static void main(String[] args){
 	BST<Integer> t = new BST<Integer>(10);
-	t.rInsert(20);
-	t.rInsert(5);
-	System.out.println(t.rSearch(5));
-	System.out.println(t.rSearch(4));
+	t.insert(20);
+	t.insert(5);
+	t.insert(40);
+	t.insert(21);
+	t.insert(22);
+	t.insert(4);
+	t.insert(6);
+	t.insert(19);
+	System.out.println(t.search(5));
+	System.out.println(t.search(4));
+	System.out.println(t.depth());
+	System.out.println(t.print());
     }
 }
