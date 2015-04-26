@@ -122,8 +122,42 @@ public class BST<E extends Comparable<E>>{
 	LinkedList<node<E>> queue = makeQueue();
 	int n=0;
 	int depth=depth();
-	String spaces="";
+	String branches;
+	String indent;
 	node<E> test;
+	while (!queue.isEmpty()){
+	    branches=" ";
+	    indent="";
+	    //System.out.println(ans); 
+	    //System.out.println(queue);
+	    for (int i=n;i>0;i--){
+		indent+=" ";
+	    }
+	    for (int i=(int)Math.pow(2,depth);i>0;i--){
+		test=queue.removeLast();
+		if (test.getData()==null){
+		    ans=" "+ans;
+		    branches=" "+branches;
+		}
+		else {
+		    if (i%2==0){ 
+			ans=test.getData()+" "+ans;
+			branches=" \\"+branches;
+		    }
+		    else {
+			ans=test.getData()+"  "+ans;
+			branches=" /"+branches;
+			if (i>1) branches=" "+branches;
+		    }
+		}
+	    }
+	    branches=indent+branches;
+	    ans=indent+ans;
+	    if (depth!=0) ans="\n"+branches+"\n"+ans;
+	    depth--;
+	    n++;
+	}
+	/*
 	while (!queue.isEmpty()){
 	    spaces="";
 	    for (int c=depth-n;c>0;c--){
@@ -138,21 +172,41 @@ public class BST<E extends Comparable<E>>{
 	    ans+="\n";
 	    n++;
 	}
+	*/
 	return ans;
     }
 
 
      public static void main(String[] args){
 	BST<Integer> t = new BST<Integer>(10);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(20);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(5);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(40);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(21);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(22);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(4);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(6);
+	System.out.println(t.print());
+	System.out.println();
 	t.insert(19);
 	System.out.println(t.print());
-	System.out.println(t.makeQueue());
+	t.insert(7);
+	System.out.println(t.print());
+	t.insert(8);
+	System.out.println(t.print());
     }
 }
