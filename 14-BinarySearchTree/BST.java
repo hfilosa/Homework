@@ -28,12 +28,10 @@ public class BST<E extends Comparable<E>>{
 
     //Recursive version of search
     public node<E> search(node<E> T,E data){
-	if (T==null) return null;
+	if (T==null || T.getData()==data) return T;
 	int c=T.getData().compareTo(data);
-	if (c==0) return T;
-	if (c>0) search(T.getLeft(),data);
-	else search(T.getRight(),data);
-	return null;
+	if (c>0) return search(T.getLeft(),data);
+	else return search(T.getRight(),data);
     }
 
 
@@ -83,6 +81,27 @@ public class BST<E extends Comparable<E>>{
 	if (c>0) parent.setLeft(leaf);
 	else if (c<0) parent.setRight(leaf);
     }
+
+    public void remove(E data){
+        node<E> parent=parentSearch(T.getData());
+	if (T.getLeft()==null || T.getRight()==null){
+	    parent.setLeft(T.getLeft());
+	    parent.setRight(T.getRight());
+	}
+	else {
+	    //node L is the largest node on the left subtree of T
+	    node<E> L = T.getLeft();
+	    while (L.getRight()!=null){
+		L=L.getRight();
+	    }
+	    E data=L.getData;
+	    //remove the node L from the tree
+	    remove(data);
+	    //put data from L into T
+	    T.setData(data);
+	}
+    }
+
     //returns depth of tree where 0 is a tree with only a root, 1 is a tree with one branch, etc.
     public int Depth(node<E> T){
 	int left=0,right=0; 
@@ -157,22 +176,6 @@ public class BST<E extends Comparable<E>>{
 	    depth--;
 	    n++;
 	}
-	/*
-	while (!queue.isEmpty()){
-	    spaces="";
-	    for (int c=depth-n;c>0;c--){
-		spaces+=" ";
-	    }
-	    ans+=spaces;
-	    for (int c=(int)Math.pow(2,n);c>0;c--){
-		test = queue.pop();
-		if (test.getData()==null) ans+=" ";
-		else ans+=test.getData()+spaces;
-	    }
-	    ans+="\n";
-	    n++;
-	}
-	*/
 	return ans;
     }
 
@@ -190,7 +193,10 @@ public class BST<E extends Comparable<E>>{
 	t.insert(40);
 	System.out.println(t.print());
 	System.out.println();
-	t.insert(21);
+	t.remove(20);
+	System.out.println(t.print());
+	System.out.println();
+	/*t.insert(21);
 	System.out.println(t.print());
 	System.out.println();
 	t.insert(22);
@@ -208,5 +214,6 @@ public class BST<E extends Comparable<E>>{
 	System.out.println(t.print());
 	t.insert(8);
 	System.out.println(t.print());
+	*/
     }
 }
