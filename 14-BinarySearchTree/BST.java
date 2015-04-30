@@ -38,13 +38,13 @@ public class BST<E extends Comparable<E>>{
     //Returns the node that would be the parent of the node with data E
     public node<E> parentSearch(E data){
 	node<E> T=root;
-	node<E> T2=null;
+	node<E> T2=root;
 	int c;
 	while (T != null){
-	    T2=T;
 	    c=T.getData().compareTo(data);
-	    if (c==0) return null;
-	    else if (c>0) T=T.getLeft();
+	    if (c==0) return T2;
+	    T2=T;
+	    if (c>0) T=T.getLeft();
 	    else T=T.getRight();
 	}
 	return T2;
@@ -83,10 +83,22 @@ public class BST<E extends Comparable<E>>{
     }
 
     public void remove(E data){
-        node<E> parent=parentSearch(T.getData());
+	node<E> T = search(data);
+        node<E> parent=parentSearch(data);
+	System.out.println(parent);
 	if (T.getLeft()==null || T.getRight()==null){
-	    parent.setLeft(T.getLeft());
-	    parent.setRight(T.getRight());
+	    if (parent.getData().compareTo(T.getData())>0){
+		if (T.getLeft()!=null){
+		    parent.setLeft(T.getLeft());
+		}
+		else parent.setLeft(T.getRight());
+	    }
+	    else{
+		if (T.getLeft()!=null){
+		    parent.setRight(T.getLeft());
+		}
+		else parent.setRight(T.getRight());
+	    }
 	}
 	else {
 	    //node L is the largest node on the left subtree of T
@@ -94,11 +106,11 @@ public class BST<E extends Comparable<E>>{
 	    while (L.getRight()!=null){
 		L=L.getRight();
 	    }
-	    E data=L.getData;
+	    E Ldata=L.getData();
 	    //remove the node L from the tree
-	    remove(data);
+	    remove(Ldata);
 	    //put data from L into T
-	    T.setData(data);
+	    T.setData(Ldata);
 	}
     }
 
@@ -193,6 +205,8 @@ public class BST<E extends Comparable<E>>{
 	t.insert(40);
 	System.out.println(t.print());
 	System.out.println();
+        Integer x =3;
+	System.out.println(x.compareTo(4));
 	t.remove(20);
 	System.out.println(t.print());
 	System.out.println();
