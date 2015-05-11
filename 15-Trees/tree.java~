@@ -1,0 +1,7 @@
+public class tree{
+    public BST<Integer> graph;
+
+    public tree(int data){
+	graph = new BST<Integer>(data);
+    }
+
