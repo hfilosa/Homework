@@ -152,7 +152,7 @@ public class BST<E extends Comparable<E>>{
 	return ans;
     }
 	    
-    public String print(){
+    public String toString(){
 	String ans="";
 	LinkedList<node<E>> queue = makeQueue();
 	int n=0;
